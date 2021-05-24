@@ -15,7 +15,7 @@ const Home = () => {
     const [isRecent, setIsRecent] = useState(false);
 
 
-    useInterval(() => updateCounts(), 2000)
+    // useInterval(() => updateCounts(), 2000)
 
     const setCounts = data => {
         const l = data.liked.filter(l => l.liked === true);
@@ -47,7 +47,10 @@ const Home = () => {
             const { data } = await axios.get('/api/jokes/getJoke');
             setJoke(data);
             setCounts(data);
-            !!user && liked(data);
+            setIsRecent(false);
+            if (user != null) {
+                liked(data);
+            }
         };
         getJoke();
     }, [refresh]);
@@ -58,6 +61,7 @@ const Home = () => {
 
     const updateCounts = async () => {
         const { data } = await axios.get(`/api/jokes/getupdatedjoke?jokeid=${joke.id}`);
+        liked(data);
         setCounts(data);
     };
 
@@ -78,8 +82,6 @@ const Home = () => {
         }
     };
 
-    // const isRecentAndLiked = isRecent && isLiked.liked;
-    // const isRecentAndDisliked = isRecent && !isLiked.liked;
     return (
 
         <div className="row">
