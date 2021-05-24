@@ -38,6 +38,7 @@ namespace ReactJokes.Web.Controllers
             }
             return joke;
         }
+
         [HttpGet]
         [Route("getalljokes")]
         public List<Joke> GetAllJokes()
@@ -45,6 +46,7 @@ namespace ReactJokes.Web.Controllers
             var repo = new JokesRepository(_connectionString);
             return repo.GetAllJokes();
         }
+
         [HttpPost]
         [Route("addlike")]
         public Joke AddLike (int UserId, int JokeId, bool Like)
@@ -59,6 +61,7 @@ namespace ReactJokes.Web.Controllers
             var repo = new JokesRepository(_connectionString);
             return repo.AddLike(like);
         }
+        
         [HttpGet]
         [Route("getupdatedjoke")]
         public Joke GetUpdatedJoke(int jokeId)
@@ -66,6 +69,7 @@ namespace ReactJokes.Web.Controllers
             var repo = new JokesRepository(_connectionString);
             return repo.GetJokeById(jokeId);
         }
+        
         [HttpGet]
         [Route("isRecent")]
         public bool IsRecent (DateTime time)
@@ -74,6 +78,7 @@ namespace ReactJokes.Web.Controllers
             var now = DateTime.Now.ToLocalTime();
             return time2 > now;
         }
+        
         [HttpPost]
         [Route("updatelike")]
         public Joke UpdateLike(int UserId, int JokeId, bool Like)

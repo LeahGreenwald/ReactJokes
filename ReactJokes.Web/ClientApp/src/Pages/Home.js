@@ -15,7 +15,7 @@ const Home = () => {
     const [isRecent, setIsRecent] = useState(false);
 
 
-    // useInterval(() => updateCounts(), 2000)
+    useInterval(() => updateCounts(), 2000)
 
     const setCounts = data => {
         const l = data.liked.filter(l => l.liked === true);
